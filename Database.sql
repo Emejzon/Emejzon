@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
   `City` varchar(64) NOT NULL DEFAULT 'Poznan',
   `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
+  `Password` varchar(256) DEFAULT 'pswrd',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -66,6 +67,7 @@ CREATE TABLE IF NOT EXISTS `workers` (
   `Name` varchar(64) DEFAULT 'John',
   `Surname` varchar(64) DEFAULT 'Pork',
   `Position` enum('Admin','Manager','Worker') DEFAULT 'Worker',
+  `Password` varchar(256) DEFAULT 'pswrd',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
