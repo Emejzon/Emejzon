@@ -1,6 +1,4 @@
-﻿using MySqlConnector;
-
-namespace Emejzon
+﻿namespace Emejzon
 {
     internal class Program
     {
