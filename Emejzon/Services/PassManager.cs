@@ -1,14 +1,12 @@
 using System.Security.Cryptography;
 using System.Text;
 using MySqlConnector;
-namespace Emejzon.Login
+namespace Emejzon.Services
 {
     public class PasswordManager
     {
-        private const string Email;
-        private const string Password;
-        public static Action<string, bool> PasswordVerify;
-        private static string HashPassword(string password)
+        public static event Action<string, bool> PasswordVerify;
+        public static string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
             {
@@ -18,7 +16,7 @@ namespace Emejzon.Login
         }
         public static bool VerifyPassword(string email, string password)
         {
-            string hashPassword = HashPassword(password);
+            string hashedPassword = HashPassword(password);
             using var connection = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
 
             connection.Open();

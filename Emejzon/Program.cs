@@ -1,7 +1,4 @@
-﻿using Emejzon.Interfaces;
-using Emejzon.Login;
-using Emejzon.Users;
-
+﻿using Emejzon.Services;
 
 namespace Emejzon
 {
@@ -10,10 +7,21 @@ namespace Emejzon
         static void Main(string[] args)
         {
             Console.WriteLine("Insert email: ");
-            string email = Console.ReadLine();
+            string? email = Console.ReadLine();
             Console.WriteLine("Insert password: ");
-            string password = Console.ReadLine();
+            string? password = Console.ReadLine();
+            PasswordManager.PasswordVerify += (email, success) => Console.WriteLine
+            ($"Login for {email}: {(success ? "succeded" : "failed")}");
 
+            if(PasswordManager.VerifyPassword(email, password)){
+                
+            }
+            else{
+                Console.WriteLine("Email or password incorrect");
+            }
+
+
+            
         }
     }
 }
