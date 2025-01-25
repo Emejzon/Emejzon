@@ -15,26 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Zrzut struktury bazy danych emejzon
-CREATE DATABASE IF NOT EXISTS `emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `emejzon`;
+-- Zrzut struktury bazy danych Emejzon
+CREATE DATABASE IF NOT EXISTS `Emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `Emejzon`;
 
--- Zrzut struktury tabela emejzon.clients
-CREATE TABLE IF NOT EXISTS `clients` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(64) NOT NULL DEFAULT 'John',
-  `Surname` varchar(64) NOT NULL DEFAULT 'Pork',
-  `Email` varchar(128) NOT NULL DEFAULT 'example@invalid.com',
-  `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
-  `City` varchar(64) NOT NULL DEFAULT 'Poznan',
-  `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
-  `Password` varchar(256) DEFAULT 'pswrd',
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Eksport danych został odznaczony.
-
--- Zrzut struktury tabela emejzon.orders
+-- Zrzut struktury tabela Emejzon.orders
 CREATE TABLE IF NOT EXISTS `orders` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ClientId` int(11) NOT NULL DEFAULT 0,
@@ -44,13 +29,13 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`Id`) USING BTREE,
   KEY `Client` (`ClientId`),
   KEY `Worker` (`WorkerId`),
-  CONSTRAINT `Client` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Client` FOREIGN KEY (`ClientId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Worker` FOREIGN KEY (`WorkerId`) REFERENCES `workers` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
--- Zrzut struktury tabela emejzon.products
+-- Zrzut struktury tabela Emejzon.products
 CREATE TABLE IF NOT EXISTS `products` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
@@ -61,13 +46,17 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 -- Eksport danych został odznaczony.
 
--- Zrzut struktury tabela emejzon.workers
-CREATE TABLE IF NOT EXISTS `workers` (
+-- Zrzut struktury tabela Emejzon.users
+CREATE TABLE IF NOT EXISTS `users` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(64) DEFAULT 'John',
-  `Surname` varchar(64) DEFAULT 'Pork',
-  `Position` enum('Admin','Manager','Worker') DEFAULT 'Worker',
-  `Password` varchar(256) DEFAULT 'pswrd',
+  `Name` varchar(64) NOT NULL DEFAULT 'John',
+  `Surname` varchar(64) NOT NULL DEFAULT 'Pork',
+  `Email` varchar(128) NOT NULL DEFAULT 'example@invalid.com',
+  `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
+  `City` varchar(64) NOT NULL DEFAULT 'Poznan',
+  `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
+  `Position` enum('Admin','Manager','Worker','Client') NOT NULL,
+  `Password` varchar(512) NOT NULL DEFAULT 'password123',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
