@@ -25,6 +25,7 @@ namespace Emejzon.Services
 
             while (reader.Read())
             {
+                Console.WriteLine(reader.GetString(0) + " " + reader.GetString(1) + " " + hashedPassword);
                 if (reader.GetString(0) == email && reader.GetString(1) == hashedPassword)
                 {
                     PasswordVerify?.Invoke(email, true);
