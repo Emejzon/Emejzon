@@ -18,14 +18,13 @@ namespace Emejzon.Services
         {
             string hashedPassword = HashPassword(password);
             using var connection = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-
             connection.Open();
+            
             using var command = new MySqlCommand("SELECT Email, Password FROM users;", connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                Console.WriteLine(reader.GetString(0) + " " + reader.GetString(1) + " " + hashedPassword);
                 if (reader.GetString(0) == email && reader.GetString(1) == hashedPassword)
                 {
                     PasswordVerify?.Invoke(email, true);

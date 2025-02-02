@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Emejzon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6be381b55f1add0668f2167b148114f3b625236e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8a2bf9404509a2fd364929611c92051367b0dc77")]
 [assembly: System.Reflection.AssemblyProductAttribute("Emejzon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Emejzon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
