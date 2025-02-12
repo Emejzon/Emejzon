@@ -104,9 +104,6 @@ namespace Emejzon
                 using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\")", conn);
                 newUser.ExecuteNonQuery();
             }
-
-
-            
         }
     }
 }
