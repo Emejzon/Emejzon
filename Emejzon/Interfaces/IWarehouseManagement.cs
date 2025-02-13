@@ -9,7 +9,8 @@ namespace Emejzon.Interfaces
 {
     internal interface IWarehouseManagement
     {
-        public static void AddProduct(){
+        public static void AddProduct()
+        {
             Console.WriteLine("Insert product name: ");
             string? name = Console.ReadLine();
             Console.WriteLine("Insert product quantity: ");
@@ -25,7 +26,8 @@ namespace Emejzon.Interfaces
 
             Console.WriteLine($"Added {name} to product list");
         }
-        public static void DeleteProduct(){
+        public static void DeleteProduct()
+        {
             Console.WriteLine("Insert product id to delete: ");
             int id = int.Parse(Console.ReadLine());
 
@@ -36,7 +38,8 @@ namespace Emejzon.Interfaces
 
             Console.WriteLine($"Deleted product with id {id}");
         }
-        public static void RefillProduct(){
+        public static void RefillProduct()
+        {
             Console.WriteLine("Insert product id to refill: ");
             int? id = int.Parse(Console.ReadLine());
             Console.WriteLine("Insert quantity to add: ");
@@ -50,24 +53,61 @@ namespace Emejzon.Interfaces
 
             Console.WriteLine($"Refilled product with id {id}");
         }
-        public static void ShowAllProducts(){
+        public static void ShowAllProducts()
+        {
             using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
             conn.Open();
             using var command = new MySqlCommand("SELECT * FROM products where hidden = 0",conn);
             using var reader = command.ExecuteReader();
 
-            while(reader.Read()){
-                Console.WriteLine($"{reader.GetString(0)}| Quantity: {reader.GetInt64(1)}| Category: {reader.GetString(2)}");
+            Console.WriteLine("ID | Name | Quantity | Category");
+
+            while(reader.Read())
+            {
+                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetString(1)}| {reader.GetInt64(2)} |{reader.GetString(3)}");
             }
         }
-        public static void ShowAllOrders(){
-            throw new NotImplementedException();
+        public static void ShowAllOrders()
+        {
+            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
+            conn.Open();
+            using var command = new MySqlCommand("SELECT * FROM orders",conn);
+            using var reader = command.ExecuteReader();
+
+            Console.WriteLine("ID | ClientID | WorkerID | Status");
+
+            while(reader.Read())
+            {
+                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)}| {reader.GetInt64(2)} |{reader.GetString(4)}");
+            }
         }
-        public static void ShowAllAssignedOrders(){
-            throw new NotImplementedException();
+        public static void ShowAllAssignedOrders()
+        {
+            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
+            conn.Open();
+            using var command = new MySqlCommand("SELECT * FROM orders where Workerid != null",conn);
+            using var reader = command.ExecuteReader();
+
+            Console.WriteLine("ID | ClientID | Status");
+
+            while(reader.Read())
+            {
+                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetInt64(2)} |{reader.GetString(4)}");
+            }
         }
-        public static void ShowAllUnassignedOrders(){
-            throw new NotImplementedException();
+        public static void ShowAllUnassignedOrders()
+        {
+            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
+            conn.Open();
+            using var command = new MySqlCommand("SELECT * FROM orders where Workerid = null",conn);
+            using var reader = command.ExecuteReader();
+
+            Console.WriteLine("ID | ClientID | Status");
+
+            while(reader.Read())
+            {
+                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
+            }
         }
 
         
