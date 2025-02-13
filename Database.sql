@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Wersja serwera:               11.4.4-MariaDB - mariadb.org binary distribution
+-- Wersja serwera:               10.4.32-MariaDB - mariadb.org binary distribution
 -- Serwer OS:                    Win64
--- HeidiSQL Wersja:              12.8.0.6908
+-- HeidiSQL Wersja:              12.10.0.7000
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,16 +15,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Zrzut struktury bazy danych Emejzon
-CREATE DATABASE IF NOT EXISTS `Emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `Emejzon`;
+-- Zrzut struktury bazy danych emejzon
+CREATE DATABASE IF NOT EXISTS `emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `emejzon`;
 
--- Zrzut struktury tabela Emejzon.orders
+-- Zrzut struktury tabela emejzon.orderedproducts
+CREATE TABLE IF NOT EXISTS `orderproducts` (
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  KEY `orderID` (`orderID`),
+  KEY `productID` (`productID`),
+  CONSTRAINT `orderedproducts_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`Id`),
+  CONSTRAINT `orderedproducts_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Eksport danych został odznaczony.
+
+-- Zrzut struktury tabela emejzon.orders
 CREATE TABLE IF NOT EXISTS `orders` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ClientId` int(11) NOT NULL DEFAULT 0,
   `WorkerId` int(11) NOT NULL DEFAULT 0,
-  `Products` varchar(1024) NOT NULL DEFAULT '0',
   `Status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`) USING BTREE,
   KEY `Client` (`ClientId`),
@@ -35,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 -- Eksport danych został odznaczony.
 
--- Zrzut struktury tabela Emejzon.products
+-- Zrzut struktury tabela emejzon.products
 CREATE TABLE IF NOT EXISTS `products` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
@@ -46,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 -- Eksport danych został odznaczony.
 
--- Zrzut struktury tabela Emejzon.users
+-- Zrzut struktury tabela emejzon.users
 CREATE TABLE IF NOT EXISTS `users` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL DEFAULT 'John',
@@ -58,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Position` enum('Admin','Manager','Worker','Client') NOT NULL,
   `Password` varchar(512) NOT NULL DEFAULT 'password123',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
