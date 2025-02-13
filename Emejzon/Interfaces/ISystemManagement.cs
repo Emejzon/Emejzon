@@ -41,6 +41,7 @@ namespace Emejzon.Interfaces
                 conn2.Open();
                 using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD,Position) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\",\"{position}\")", conn2);
                 newUser.ExecuteNonQuery();
+                conn2.Dispose();
             }
             else
             {
