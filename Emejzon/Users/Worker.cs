@@ -7,10 +7,10 @@ using Emejzon.Interfaces;
 
 namespace Emejzon.Users
 {
-    internal class Worker : User, IOrderManagement
+    internal class Worker : User, IOrderManagement, ISystemManagement, IWarehouseManagement
     {
         public string Position { get; set; }
-        public Worker(int id, string? name, string? surname, string? email, string position) : base(id, name, surname, email)
+        public Worker(int id, string? name, string? surname, string? email, Role role, string position) : base(id, name, surname, email, role)
         {
             Position = position;
         }
