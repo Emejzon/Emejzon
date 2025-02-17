@@ -56,6 +56,7 @@ namespace Emejzon
             if (PasswordManager.VerifyPassword(email, password))
             {
                 Console.ReadKey();
+                //create new client or worker instance and trigger proper menu
             }
             else
             {
