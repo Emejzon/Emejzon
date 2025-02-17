@@ -66,45 +66,44 @@ namespace Emejzon
         }
         public static void CreateClientAccount()
         {
-            Console.WriteLine("Insert name: ");
-            string? name = Console.ReadLine();
-            Console.WriteLine("Insert surname: ");
-            string? surname = Console.ReadLine();
-            Console.WriteLine("Insert phone number: ");
-            int? num = int.Parse(Console.ReadLine());
-            Console.WriteLine("Insert city: ");
-            string? city = Console.ReadLine();
-            Console.WriteLine("Insert address: ");
-            string? address = Console.ReadLine();
-            Console.WriteLine("Insert email: ");
-            string? email = Console.ReadLine();
-            Console.WriteLine("Insert password: ");
-            string password = PasswordManager.HashPassword(Console.ReadLine());
-
-            using var connection = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            connection.Open();
-
-            using var command = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", connection);
-            using var reader = command.ExecuteReader();
-
-            bool exist = false;
-
-            while (reader.Read())
+            var db = DBManager.Instance();
+            if (db.IsConnect())
             {
-                if(reader.GetString(0) == email || reader.GetInt64(1) == num){
-                    exist = true;
+                System.Console.WriteLine(db.Conn);
+                Console.WriteLine("Insert name: ");
+                string? name = Console.ReadLine();
+                Console.WriteLine("Insert surname: ");
+                string? surname = Console.ReadLine();
+                Console.WriteLine("Insert phone number: ");
+                int? num = int.Parse(Console.ReadLine());
+                Console.WriteLine("Insert city: ");
+                string? city = Console.ReadLine();
+                Console.WriteLine("Insert address: ");
+                string? address = Console.ReadLine();
+                Console.WriteLine("Insert email: ");
+                string? email = Console.ReadLine();
+                Console.WriteLine("Insert password: ");
+                string password = PasswordManager.HashPassword(Console.ReadLine());
+
+                using var command = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", db.Conn);
+                using var reader = command.ExecuteReader();
+
+                bool exist = false;
+
+                while (reader.Read())
+                {
+                    if (reader.GetString(0) == email || reader.GetInt64(1) == num)
+                    {
+                        exist = true;
+                    }
+                }
+                reader.Dispose();
+                if (!exist)
+                {
+                    using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\")", db.Conn);
+                    newUser.ExecuteNonQuery();
                 }
             }
-            connection.Dispose();
-
-            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn.Open();
-
-            if(!exist)
-            {
-                using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\")", conn);
-                newUser.ExecuteNonQuery();
-            } 
         }
     }
 }
