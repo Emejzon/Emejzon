@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
+using Emejzon.Services;
 
 namespace Emejzon.Interfaces
 {
@@ -11,105 +12,146 @@ namespace Emejzon.Interfaces
     {
         public static void AddProduct()
         {
-            Console.WriteLine("Insert product name: ");
-            string? name = Console.ReadLine();
-            Console.WriteLine("Insert product quantity: ");
-            int quantity = int.Parse(Console.ReadLine());
-            Console.WriteLine("Insert product category: ");
-            string? category = Console.ReadLine();
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                Console.WriteLine("Insert product name: ");
+                string? name = Console.ReadLine();
+                Console.WriteLine("Insert product quantity: ");
+                int quantity = int.Parse(Console.ReadLine());
+                Console.WriteLine("Insert product category: ");
+                string? category = Console.ReadLine();
 
-            using var conn1 = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn1.Open();
-            using var insert = new MySqlCommand($"Insert into products(Name,Quantity,Category) values (\"{name}\",{quantity},\"category\");", conn1);
-            insert.ExecuteNonQuery();
-            conn1.Dispose();
+                using var insert = new MySqlCommand($"Insert into products(Name,Quantity,Category) values (\"{name}\",{quantity},\"{category}\");", DB.Conn);
+                insert.ExecuteNonQuery();
 
-            Console.WriteLine($"Added {name} to product list");
+                Console.WriteLine($"Added {name} to product list");
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
+            }
         }
         public static void DeleteProduct()
         {
-            Console.WriteLine("Insert product id to delete: ");
-            int id = int.Parse(Console.ReadLine());
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                Console.WriteLine("Insert product id to delete: ");
+                int id = int.Parse(Console.ReadLine());
 
-            using var conn1 = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn1.Open();
-            using var delete = new MySqlCommand($"Delete from products where id = {id}",conn1);
-            delete.ExecuteNonQuery();
+                using var delete = new MySqlCommand($"Delete from products where id = {id}", DB.Conn);
+                delete.ExecuteNonQuery();
 
-            Console.WriteLine($"Deleted product with id {id}");
+                Console.WriteLine($"Deleted product with id {id}");
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
+            }
+
         }
         public static void RefillProduct()
         {
-            Console.WriteLine("Insert product id to refill: ");
-            int? id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Insert quantity to add: ");
-            int? quantity = int.Parse(Console.ReadLine());
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                Console.WriteLine("Insert product id to refill: ");
+                int? id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Insert quantity to add: ");
+                int? quantity = int.Parse(Console.ReadLine());
 
-            using var conn1 = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn1.Open();
-            using var update = new MySqlCommand($"UPDATE products SET quantity = quantity + {quantity} WHERE id = {id};");
-            update.ExecuteNonQuery();
-            conn1.Dispose();
+                using var update = new MySqlCommand($"UPDATE products SET quantity = quantity + {quantity} WHERE id = {id};", DB.Conn);
+                update.ExecuteNonQuery();
 
-            Console.WriteLine($"Refilled product with id {id}");
+                Console.WriteLine($"Refilled product with id {id}");
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
+            }
         }
         public static void ShowAllProducts()
         {
-            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn.Open();
-            using var command = new MySqlCommand("SELECT * FROM products where hidden = 0",conn);
-            using var reader = command.ExecuteReader();
-
-            Console.WriteLine("ID | Name | Quantity | Category");
-
-            while(reader.Read())
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
             {
-                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetString(1)}| {reader.GetInt64(2)} |{reader.GetString(3)}");
+                using var select = new MySqlCommand("SELECT * FROM products where hidden = 0", DB.Conn);
+                using var reader = select.ExecuteReader();
+
+                Console.WriteLine("ID | Name | Quantity | Category");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetString(1)}| {reader.GetInt64(2)} |{reader.GetString(3)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
             }
         }
         public static void ShowAllOrders()
         {
-            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn.Open();
-            using var command = new MySqlCommand("SELECT * FROM orders",conn);
-            using var reader = command.ExecuteReader();
-
-            Console.WriteLine("ID | ClientID | WorkerID | Status");
-
-            while(reader.Read())
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
             {
-                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)}| {reader.GetInt64(2)} |{reader.GetString(4)}");
+                using var select = new MySqlCommand("SELECT * FROM orders", DB.Conn);
+                using var reader = select.ExecuteReader();
+
+                Console.WriteLine("ID | ClientID | WorkerID | Status");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)}| {reader.GetInt64(2)} |{reader.GetString(4)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
             }
         }
         public static void ShowAllAssignedOrders()
         {
-            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn.Open();
-            using var command = new MySqlCommand("SELECT * FROM orders where Workerid != null",conn);
-            using var reader = command.ExecuteReader();
-
-            Console.WriteLine("ID | ClientID | Status");
-
-            while(reader.Read())
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
             {
-                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetInt64(2)} |{reader.GetString(4)}");
+                using var select = new MySqlCommand("SELECT * FROM orders where Workerid != null", DB.Conn);
+                using var reader = select.ExecuteReader();
+
+                Console.WriteLine("ID | ClientID | Status");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetInt64(2)} |{reader.GetString(4)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
             }
         }
         public static void ShowAllUnassignedOrders()
         {
-            using var conn = new MySqlConnection("server=127.0.0.1;user=root;database=Emejzon;password=admin123");
-            conn.Open();
-            using var command = new MySqlCommand("SELECT * FROM orders where Workerid = null",conn);
-            using var reader = command.ExecuteReader();
-
-            Console.WriteLine("ID | ClientID | Status");
-
-            while(reader.Read())
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
             {
-                Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
+                using var command = new MySqlCommand("SELECT * FROM orders where Workerid = null", DB.Conn);
+                using var reader = command.ExecuteReader();
+
+                Console.WriteLine("ID | ClientID | Status");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
             }
         }
 
-        
+
     }
 }
