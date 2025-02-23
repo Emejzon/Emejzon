@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Wersja serwera:               10.4.32-MariaDB - mariadb.org binary distribution
+-- Wersja serwera:               11.4.4-MariaDB - mariadb.org binary distribution
 -- Serwer OS:                    Win64
--- HeidiSQL Wersja:              12.10.0.7000
+-- HeidiSQL Wersja:              12.8.0.6908
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,25 +19,13 @@
 CREATE DATABASE IF NOT EXISTS `emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `emejzon`;
 
--- Zrzut struktury tabela emejzon.orderedproducts
-CREATE TABLE IF NOT EXISTS `orderproducts` (
-  `orderID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  KEY `orderID` (`orderID`),
-  KEY `productID` (`productID`),
-  CONSTRAINT `orderedproducts_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`Id`),
-  CONSTRAINT `orderedproducts_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Eksport danych został odznaczony.
-
 -- Zrzut struktury tabela emejzon.orders
 CREATE TABLE IF NOT EXISTS `orders` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ClientId` int(11) NOT NULL DEFAULT 0,
   `WorkerId` int(11) NOT NULL DEFAULT 0,
-  `Status` int(11) NOT NULL DEFAULT 0,
+  `Products` varchar(1024) NOT NULL DEFAULT '0',
+  `Status` enum('Unasigned','Asigned','Finalized','Sent') NOT NULL DEFAULT 'Unasigned',
   PRIMARY KEY (`Id`) USING BTREE,
   KEY `Client` (`ClientId`),
   KEY `Worker` (`WorkerId`),
@@ -52,9 +40,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
-  `Catergory` varchar(64) DEFAULT NULL,
+  `Catergory` enum('Groceries','Electronics','Furniture','Other') DEFAULT NULL,
+  `Hidden` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
@@ -67,10 +56,10 @@ CREATE TABLE IF NOT EXISTS `users` (
   `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
   `City` varchar(64) NOT NULL DEFAULT 'Poznan',
   `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
-  `Position` enum('Admin','Manager','Worker','Client') NOT NULL,
+  `Position` enum('Admin','Manager','Worker','Client') NOT NULL DEFAULT 'Client',
   `Password` varchar(512) NOT NULL DEFAULT 'password123',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
