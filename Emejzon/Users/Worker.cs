@@ -7,12 +7,17 @@ using Emejzon.Interfaces;
 
 namespace Emejzon.Users
 {
+    enum Role{
+        Worker,
+        Admin,
+        Manager
+    }
     internal class Worker : User, IOrderManagement, ISystemManagement, IWarehouseManagement
     {
-        public string Position { get; set; }
-        public Worker(int id, string? name, string? surname, string? email, Role role, string position) : base(id, name, surname, email, role)
+        public Role Role { get; set; }
+        public Worker(int id, string? name, Position position, Role role) : base(id, name, position)
         {
-            Position = position;
+            Role = role;
         }
     }
 }

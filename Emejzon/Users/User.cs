@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Emejzon.Users
 {
-    enum Role{
+    enum Position{
         Worker,
-        Admin,
-        Manager
+        Client
     }
     abstract class User
     {
@@ -17,14 +16,12 @@ namespace Emejzon.Users
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? Email { get; set; }
-        public Role Role { get; set; }
-        public User(int id, string? name, string? surname, string? email, Role role)
+        public Position Position { get; set; }
+        public User(int id, string? name, Position position)
         {
             Id = id;
             Name = name;
-            Surname = surname;
-            Email = email;
-            Role = role;
+            Position = position;
         }
     }
 }

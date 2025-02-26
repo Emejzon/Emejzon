@@ -1,4 +1,6 @@
-﻿using Emejzon.Services;
+﻿using System.Data.Common;
+using Emejzon.Services;
+using Emejzon.Users;
 using MySqlConnector;
 
 namespace Emejzon
@@ -56,7 +58,44 @@ namespace Emejzon
             if (PasswordManager.VerifyPassword(email, password))
             {
                 Console.ReadKey();
-                //create new client or worker instance and trigger proper menu
+                var db = DBManager.Instance();
+                if(db.IsConnect())
+                {
+                    using var select = new MySqlCommand($"Select * from users where email = \"{email}\"");
+                    using var reader = select.ExecuteReader();
+
+                    if(reader.GetString(7) == "Client")
+                    {
+                        Client client = new Client(reader.GetInt32(0),reader.GetString(1),Position.Client);
+                        //trigger client menu
+                    }
+                    else
+                    {
+                        string pos = reader.GetString(7);
+                        Role role;
+                        switch (pos)
+                        {
+                            case "Admin":
+                                role = Role.Admin;
+                                break;
+                            case "Manager":
+                                role = Role.Manager;
+                                break;
+                            case "Worker":
+                                role = Role.Worker;
+                                break;
+                            default:
+                                role = Role.Worker;
+                                break;
+                        }
+                        Worker worker = new Worker(reader.GetInt32(0),reader.GetString(1),Position.Worker,role);
+                        //trigger worker menu
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Database connection error");
+                }
             }
             else
             {
