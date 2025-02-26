@@ -119,7 +119,7 @@ namespace Emejzon.Interfaces
                 using var select = new MySqlCommand("SELECT * FROM orders where Workerid != null", DB.Conn);
                 using var reader = select.ExecuteReader();
 
-                Console.WriteLine("ID | ClientID | Status");
+                Console.WriteLine("ID | ClientID | WorkerID | Status");
 
                 while (reader.Read())
                 {
@@ -151,7 +151,31 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Database connection error");
             }
         }
+        public static void AsignOrder()
+        {
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                Console.WriteLine("Insert phone number: ");
+                int? orderID = int.Parse(Console.ReadLine());
+                Console.WriteLine("Insert phone number: ");
+                int? workerID = int.Parse(Console.ReadLine());
 
+                using var command = new MySqlCommand($"Update orders set workerID = {workerID} where orderID = {orderID}", DB.Conn);
+                using var reader = command.ExecuteReader();
+
+                Console.WriteLine("ID | ClientID | Status");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
+            }
+        }
 
     }
 }

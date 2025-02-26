@@ -82,5 +82,9 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Database connection error");
             }
         }
+        static void ShowLogs()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
