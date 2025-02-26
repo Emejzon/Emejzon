@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `Products` varchar(1024) NOT NULL DEFAULT '0',
   `Status` enum('Unasigned','Asigned','Finalized','Sent') NOT NULL DEFAULT 'Unasigned',
   PRIMARY KEY (`Id`) USING BTREE,
-  KEY `Client` (`ClientId`),
-  KEY `Worker` (`WorkerId`),
-  CONSTRAINT `Client` FOREIGN KEY (`ClientId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Worker` FOREIGN KEY (`WorkerId`) REFERENCES `workers` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `Client` (`UserId`),
+  KEY `Worker` (`UserId`),
+  CONSTRAINT `Client` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Worker` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
