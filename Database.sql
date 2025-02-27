@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Wersja serwera:               11.4.4-MariaDB - mariadb.org binary distribution
+-- Wersja serwera:               10.4.32-MariaDB - mariadb.org binary distribution
 -- Serwer OS:                    Win64
--- HeidiSQL Wersja:              12.8.0.6908
+-- HeidiSQL Wersja:              12.10.0.7000
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,31 +19,14 @@
 CREATE DATABASE IF NOT EXISTS `emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `emejzon`;
 
--- Zrzut struktury tabela emejzon.orders
-CREATE TABLE IF NOT EXISTS `orders` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `ClientId` int(11) NOT NULL DEFAULT 0,
-  `WorkerId` int(11) NOT NULL DEFAULT 0,
-  `Products` varchar(1024) NOT NULL DEFAULT '0',
-  `Status` enum('Unasigned','Asigned','Finalized','Sent') NOT NULL DEFAULT 'Unasigned',
-  PRIMARY KEY (`Id`) USING BTREE,
-  KEY `Client` (`UserId`),
-  KEY `Worker` (`UserId`),
-  CONSTRAINT `Client` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Worker` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Eksport danych został odznaczony.
-
 -- Zrzut struktury tabela emejzon.products
 CREATE TABLE IF NOT EXISTS `products` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
-  `Catergory` enum('Groceries','Electronics','Furniture','Other') DEFAULT NULL,
-  `Hidden` tinyint(4) DEFAULT 0,
+  `Catergory` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
@@ -56,10 +39,42 @@ CREATE TABLE IF NOT EXISTS `users` (
   `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
   `City` varchar(64) NOT NULL DEFAULT 'Poznan',
   `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
-  `Position` enum('Admin','Manager','Worker','Client') NOT NULL DEFAULT 'Client',
+  `Position` enum('Admin','Manager','Worker','Client') NOT NULL,
   `Password` varchar(512) NOT NULL DEFAULT 'password123',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Zrzut struktury tabela emejzon.orders
+CREATE TABLE IF NOT EXISTS `orders` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `ClientId` int(11) NOT NULL DEFAULT 0,
+  `WorkerId` int(11) NOT NULL DEFAULT 0,
+  `Status` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`Id`) USING BTREE,
+
+  KEY `ClientId` (`ClientId`),
+  KEY `WorkerId` (`WorkerId`),
+  CONSTRAINT `ClientId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `WorkerId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Eksport danych został odznaczony.
+
+-- Eksport danych został odznaczony.
+
+-- Zrzut struktury tabela emejzon.orderedproducts
+CREATE TABLE IF NOT EXISTS `orderproducts` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `OrderId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+
+  KEY `OrderId` (`OrderId`),
+  KEY `ProductId` (`ProductId`),
+  CONSTRAINT `OrderId` FOREIGN KEY (`Id`) REFERENCES `orders` (`Id`),
+  CONSTRAINT `ProductId` FOREIGN KEY (`Id`) REFERENCES `products` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
 
