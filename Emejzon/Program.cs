@@ -108,7 +108,6 @@ namespace Emejzon
             var db = DBManager.Instance();
             if (db.IsConnect())
             {
-                System.Console.WriteLine(db.Conn);
                 Console.WriteLine("Insert name: ");
                 string? name = Console.ReadLine();
                 Console.WriteLine("Insert surname: ");
@@ -134,6 +133,7 @@ namespace Emejzon
                     if (reader.GetString(0) == email || reader.GetInt64(1) == num)
                     {
                         exist = true;
+                        Console.WriteLine("User with this email or phone number already exist");
                     }
                 }
                 reader.Dispose();

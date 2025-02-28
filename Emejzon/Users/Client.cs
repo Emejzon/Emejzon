@@ -8,7 +8,7 @@ using Emejzon.Interfaces;
 
 namespace Emejzon.Users
 {
-    internal class Client : User , IClient
+    internal class Client : User
     {
         public int PhoneNumber { get; set; }
         public string? City { get; set; }
