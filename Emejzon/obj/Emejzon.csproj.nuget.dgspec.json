@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj": {}
+    "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj": {}
   },
   "projects": {
-    "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj": {
+    "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj",
+        "projectUniqueName": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj",
         "projectName": "Emejzon",
-        "projectPath": "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj",
-        "packagesPath": "/home/f/.nuget/packages/",
-        "outputPath": "/home/f/kod/Emejzon/Emejzon/Emejzon/obj/",
+        "projectPath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj",
+        "packagesPath": "C:\\Users\\Adminitrator\\.nuget\\packages\\",
+        "outputPath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/f/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Adminitrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -47,13 +53,13 @@
             "Microsoft.DotNet.ILCompiler": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.2, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.2, )",
+              "version": "[9.0.0, )",
               "autoReferenced": true
             },
             "MySqlConnector": {
@@ -74,8 +80,8 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[9.0.2, 9.0.2]"
+              "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
+              "version": "[9.0.0, 9.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -83,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

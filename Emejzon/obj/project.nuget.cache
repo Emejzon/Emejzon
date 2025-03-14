@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "be/9mlcE658=",
+  "dgSpecHash": "uqGE9xNjutU=",
   "success": true,
-  "projectFilePath": "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj",
+  "projectFilePath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj",
   "expectedPackageFiles": [
-    "/home/f/.nuget/packages/microsoft.dotnet.ilcompiler/9.0.2/microsoft.dotnet.ilcompiler.9.0.2.nupkg.sha512",
-    "/home/f/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
-    "/home/f/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
-    "/home/f/.nuget/packages/microsoft.net.illink.tasks/9.0.2/microsoft.net.illink.tasks.9.0.2.nupkg.sha512",
-    "/home/f/.nuget/packages/mysqlconnector/2.4.0/mysqlconnector.2.4.0.nupkg.sha512",
-    "/home/f/.nuget/packages/runtime.linux-x64.microsoft.dotnet.ilcompiler/9.0.2/runtime.linux-x64.microsoft.dotnet.ilcompiler.9.0.2.nupkg.sha512"
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\9.0.0\\microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512",
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.0\\microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512",
+    "C:\\Users\\Adminitrator\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\9.0.0\\runtime.win-x64.microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512"
   ],
   "logs": []
 }
