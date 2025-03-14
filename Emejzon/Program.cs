@@ -54,15 +54,14 @@ namespace Emejzon
             string? password = Console.ReadLine();
             PasswordManager.PasswordVerify += (email, success) => Console.WriteLine
             ($"Login for {email} {(success ? "succeded" : "failed")}");
-
             if (PasswordManager.VerifyPassword(email, password))
             {
-                Console.ReadKey();
                 var db = DBManager.Instance();
                 if(db.IsConnect())
                 {
-                    using var select = new MySqlCommand($"Select * from users where email = \"{email}\"");
+                    using var select = new MySqlCommand($"Select * from users where email = \"{email}\"",db.Conn);
                     using var reader = select.ExecuteReader();
+                    reader.Read();
 
                     if(reader.GetString(7) == "Client")
                     {

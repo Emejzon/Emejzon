@@ -8,15 +8,15 @@
     ".NETCoreApp,Version=v9.0": {
       "Emejzon/1.0.0": {
         "dependencies": {
-          "Microsoft.DotNet.ILCompiler": "9.0.2",
-          "Microsoft.NET.ILLink.Tasks": "9.0.2",
+          "Microsoft.DotNet.ILCompiler": "9.0.0",
+          "Microsoft.NET.ILLink.Tasks": "9.0.0",
           "MySqlConnector": "2.4.0"
         },
         "runtime": {
           "Emejzon.dll": {}
         }
       },
-      "Microsoft.DotNet.ILCompiler/9.0.2": {},
+      "Microsoft.DotNet.ILCompiler/9.0.0": {},
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
         "runtime": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -36,7 +36,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.2": {},
+      "Microsoft.NET.ILLink.Tasks/9.0.0": {},
       "MySqlConnector/2.4.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
@@ -57,12 +57,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.DotNet.ILCompiler/9.0.2": {
+    "Microsoft.DotNet.ILCompiler/9.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eyIUUqqPy7brzmoV04zabOUm0puEAAjZd3O3vuzan9iTTh0oIPwts8fLxZFoEZCFi63ACFtHbNBs5Y7myB3ZDQ==",
-      "path": "microsoft.dotnet.ilcompiler/9.0.2",
-      "hashPath": "microsoft.dotnet.ilcompiler.9.0.2.nupkg.sha512"
+      "sha512": "sha512-bbnlV2PbUmCQ8Ndpx0kJaicLyV28IU+4IzyctQLL57+DxrHurYr2qsJrC8+yD44Q0DyPfv2oM168c1Tk6Bxbmg==",
+      "path": "microsoft.dotnet.ilcompiler/9.0.0",
+      "hashPath": "microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
       "type": "package",
@@ -78,12 +78,12 @@
       "path": "microsoft.extensions.logging.abstractions/8.0.2",
       "hashPath": "microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512"
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.2": {
+    "Microsoft.NET.ILLink.Tasks/9.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+KFnCLVPicEq99ko0tq+ycTvNLXHw0tImmTZjPloB/DOFLPT56KLfk5aS7wbgXRPzYhXTTBYLGaABea5mke77w==",
-      "path": "microsoft.net.illink.tasks/9.0.2",
-      "hashPath": "microsoft.net.illink.tasks.9.0.2.nupkg.sha512"
+      "sha512": "sha512-zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
+      "path": "microsoft.net.illink.tasks/9.0.0",
+      "hashPath": "microsoft.net.illink.tasks.9.0.0.nupkg.sha512"
     },
     "MySqlConnector/2.4.0": {
       "type": "package",
