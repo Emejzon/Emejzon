@@ -9,6 +9,8 @@ namespace Emejzon
     {
         static void Main(string[] args)
         {
+            PasswordManager.PasswordVerify += (email, success) => Console.WriteLine
+            ($"Login for {email} {(success ? "succeded" : "failed")}");
             while (true)
             {
                 try
@@ -52,8 +54,7 @@ namespace Emejzon
             string? email = Console.ReadLine();
             Console.WriteLine("Insert password: ");
             string? password = Console.ReadLine();
-            PasswordManager.PasswordVerify += (email, success) => Console.WriteLine
-            ($"Login for {email} {(success ? "succeded" : "failed")}");
+            
             if (PasswordManager.VerifyPassword(email, password))
             {
                 var db = DBManager.Instance();
@@ -94,6 +95,7 @@ namespace Emejzon
                 else
                 {
                     Console.WriteLine("Database connection error");
+                    Console.WriteLine("Test");
                 }
             }
             else
