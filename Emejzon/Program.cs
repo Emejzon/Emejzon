@@ -95,7 +95,6 @@ namespace Emejzon
                 else
                 {
                     Console.WriteLine("Database connection error");
-                    Console.WriteLine("Test");
                 }
             }
             else
