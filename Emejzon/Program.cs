@@ -67,7 +67,11 @@ namespace Emejzon
                     if(reader.GetString(7) == "Client")
                     {
                         Client client = new Client(reader.GetInt32(0),reader.GetString(1),Position.Client);
-                        //trigger client menu
+                        while (true)
+                        {
+                            client.ClientMenu(client.Id);
+                            Console.ReadKey();
+                        }
                     }
                     else
                     {
@@ -89,7 +93,11 @@ namespace Emejzon
                                 break;
                         }
                         Worker worker = new Worker(reader.GetInt32(0),reader.GetString(1),Position.Worker,role);
-                        worker.WorkersMenu(worker.Role, worker.Id);
+                        while (true)
+                        {
+                            worker.WorkersMenu(worker.Role, worker.Id);
+                            Console.ReadKey();
+                        }
                     }
                 }
                 else
