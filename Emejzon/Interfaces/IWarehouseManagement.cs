@@ -44,6 +44,7 @@ namespace Emejzon.Interfaces
                 delete.ExecuteNonQuery();
 
                 Console.WriteLine($"Deleted product with id {id}");
+                DB.Close();
             }
             else
             {

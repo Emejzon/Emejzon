@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|c:\\kod\\emejzon\\emejzon\\emejzon\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|c:\\kod\\emejzon\\emejzon\\emejzon\\users\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|solutionrelative:users\\worker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|c:\\kod\\emejzon\\emejzon\\emejzon\\users\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|solutionrelative:users\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users\\Manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|c:\\kod\\emejzon\\emejzon\\emejzon\\users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|solutionrelative:users\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|c:\\kod\\emejzon\\emejzon\\emejzon\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76A8D1DE-FBE5-41DD-B64E-7B7C7438F029}|Emejzon.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Users\\Admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +26,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Worker.cs",
               "DocumentMoniker": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Worker.cs",
               "RelativeDocumentMoniker": "Users\\Worker.cs",
@@ -43,7 +47,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Manager.cs",
               "DocumentMoniker": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Manager.cs",
               "RelativeDocumentMoniker": "Users\\Manager.cs",
@@ -55,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Admin.cs",
               "DocumentMoniker": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Admin.cs",
               "RelativeDocumentMoniker": "Users\\Admin.cs",
@@ -67,15 +71,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAwwGEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T18:53:15.531Z"
+              "WhenOpened": "2025-01-18T18:53:15.531Z",
+              "EditorCaption": ""
             }
           ]
         }

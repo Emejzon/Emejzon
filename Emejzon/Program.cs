@@ -57,16 +57,17 @@ namespace Emejzon
             
             if (PasswordManager.VerifyPassword(email, password))
             {
-                var db = DBManager.Instance();
-                if(db.IsConnect())
+                var DB = DBManager.Instance();
+                if(DB.IsConnect())
                 {
-                    using var select = new MySqlCommand($"Select * from users where email = \"{email}\"",db.Conn);
+                    using var select = new MySqlCommand($"Select * from users where email = \"{email}\"",DB.Conn);
                     using var reader = select.ExecuteReader();
                     reader.Read();
 
                     if(reader.GetString(7) == "Client")
                     {
                         Client client = new Client(reader.GetInt32(0),reader.GetString(1),Position.Client);
+                        DB.Close();
                         //trigger client menu
                     }
                     else
@@ -88,7 +89,9 @@ namespace Emejzon
                                 role = Role.Worker;
                                 break;
                         }
+
                         Worker worker = new Worker(reader.GetInt32(0),reader.GetString(1),Position.Worker,role);
+                        DB.Close();
                         worker.WorkersMenu(worker.Role, worker.Id);
                     }
                 }
@@ -105,8 +108,8 @@ namespace Emejzon
         }
         public static void CreateClientAccount()
         {
-            var db = DBManager.Instance();
-            if (db.IsConnect())
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
             {
                 Console.WriteLine("Insert name: ");
                 string? name = Console.ReadLine();
@@ -123,7 +126,7 @@ namespace Emejzon
                 Console.WriteLine("Insert password: ");
                 string password = PasswordManager.HashPassword(Console.ReadLine());
 
-                using var command = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", db.Conn);
+                using var command = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", DB.Conn);
                 using var reader = command.ExecuteReader();
 
                 bool exist = false;
@@ -139,9 +142,14 @@ namespace Emejzon
                 reader.Dispose();
                 if (!exist)
                 {
-                    using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\")", db.Conn);
+                    using var newUser = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\")", DB.Conn);
                     newUser.ExecuteNonQuery();
                 }
+                DB.Close();
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
             }
         }
     }

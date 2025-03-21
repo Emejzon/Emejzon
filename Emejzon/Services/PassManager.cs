@@ -36,6 +36,7 @@ namespace Emejzon.Services
                 }
                 PasswordVerify?.Invoke(email, false);
                 return false;
+                DB.Close();
             }
             else
             {

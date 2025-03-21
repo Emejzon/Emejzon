@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "Users\\Worker.cs",
               "ToolTip": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Users\\Worker.cs",
               "RelativeToolTip": "Users\\Worker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-18T19:22:14.145Z",
               "EditorCaption": ""
@@ -51,8 +51,7 @@
               "RelativeToolTip": "Users\\Manager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T19:21:42.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-18T19:21:42.559Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "Users\\Admin.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T19:17:28.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-18T19:17:28.675Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T18:53:15.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-18T18:53:15.531Z"
             }
           ]
         }
