@@ -10,7 +10,7 @@ namespace Emejzon.Interfaces
 {
     internal interface IWarehouseManagement
     {
-        public static void AddProduct()
+        public static void AddProduct(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
@@ -26,13 +26,17 @@ namespace Emejzon.Interfaces
                 insert.ExecuteNonQuery();
 
                 Console.WriteLine($"Added {name} to product list");
+                LogManager.AddLogEntry(userId, $"Added {name} to product list");
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
             }
         }
-        public static void DeleteProduct()
+        public static void DeleteProduct(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
@@ -44,6 +48,9 @@ namespace Emejzon.Interfaces
                 delete.ExecuteNonQuery();
 
                 Console.WriteLine($"Deleted product with id {id}");
+                LogManager.AddLogEntry(userId, $"Deleted product with id {id}");
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
@@ -52,7 +59,7 @@ namespace Emejzon.Interfaces
             }
 
         }
-        public static void RefillProduct()
+        public static void RefillProduct(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
@@ -66,6 +73,10 @@ namespace Emejzon.Interfaces
                 update.ExecuteNonQuery();
 
                 Console.WriteLine($"Refilled product with id {id}");
+                LogManager.AddLogEntry(userId, $"Refilled product with id {id}");
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
@@ -86,6 +97,9 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetString(1)}| {reader.GetInt64(2)} |{reader.GetString(3)}");
                 }
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
@@ -106,6 +120,9 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)}| {reader.GetInt64(2)} |{reader.GetString(4)}");
                 }
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
@@ -126,6 +143,9 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetInt64(2)} |{reader.GetString(4)}");
                 }
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
@@ -146,35 +166,39 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
                 }
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
             }
         }
-        public static void AsignOrder()
+        public static void AsignOrder(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
             {
-                Console.WriteLine("Insert phone number: ");
+                Console.WriteLine("Insert orderId: ");
                 int? orderID = int.Parse(Console.ReadLine());
-                Console.WriteLine("Insert phone number: ");
+                Console.WriteLine("Insert workerId: ");
                 int? workerID = int.Parse(Console.ReadLine());
 
-                using var command = new MySqlCommand($"Update orders set workerID = {workerID} where orderID = {orderID}", DB.Conn);
-                using var reader = command.ExecuteReader();
+                using var update = new MySqlCommand($"Update orders set workerID = {workerID} where orderID = {orderID}", DB.Conn);
+                update.ExecuteNonQuery();
 
-                Console.WriteLine("ID | ClientID | Status");
-
-                while (reader.Read())
-                {
-                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
-                }
+                Console.WriteLine($"Order with id {orderID} asigned to worker with id {workerID}");
+                LogManager.AddLogEntry(userId, $"Order with id {orderID} asigned to worker with id {workerID}");
+                Console.ReadKey();
+                Console.Clear();
+                DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 

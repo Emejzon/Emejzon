@@ -18,7 +18,7 @@ namespace Emejzon.Interfaces
                 using var insert = new MySqlCommand($"Insert into orders(ClientId) values ({clientId});", DB.Conn);
                 insert.ExecuteNonQuery();
 
-                while(true)
+                while (true)
                 {
                     Console.WriteLine("Insert product id: ");
                     var productId = int.Parse(Console.ReadLine());
@@ -30,16 +30,21 @@ namespace Emejzon.Interfaces
 
                     Console.WriteLine("Do you want to add another product? (y/n)");
                     var answer = Console.ReadLine();
-                    if(answer == "n")
+                    if (answer == "n")
                     {
                         break;
                     }
                 }
+                LogManager.AddLogEntry(clientId, "Order placed");
+                Console.WriteLine("Order placed");
+                Console.ReadKey();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         public static void ShowOrdersStatus(int clientId)
@@ -53,11 +58,15 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"Order id: {reader["OrderId"]}");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         public static void RemoveOrder(int clientId)
@@ -67,14 +76,34 @@ namespace Emejzon.Interfaces
             {
                 Console.WriteLine("Insert order id: ");
                 var orderId = int.Parse(Console.ReadLine());
-                using var delete = new MySqlCommand($"Delete from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
-                delete.ExecuteNonQuery();
+
+                using var select = new MySqlCommand($"Select * from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
+                using var reader = select.ExecuteReader();
+                if (!reader.Read())
+                {
+                    Console.WriteLine("Order not found");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
+                else
+                {
+                    reader.Close();
+                    using var delete = new MySqlCommand($"Delete from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
+                    delete.ExecuteNonQuery();
+                }
+
+                LogManager.AddLogEntry(clientId, $"Order with id {orderId} removed");
                 Console.WriteLine($"Order with id {orderId} removed");
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
     }

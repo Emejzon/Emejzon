@@ -28,10 +28,10 @@ namespace Emejzon.Users
             switch (role)
             {
                 case Role.Admin:
-                    AdminMenu();
+                    AdminMenu(id);
                     break;
                 case Role.Manager:
-                    ManagerMenu();
+                    ManagerMenu(id);
                     break;
                 case Role.Worker:
                     WorkerMenu(id);
@@ -39,7 +39,7 @@ namespace Emejzon.Users
             }
         }
 
-        public void AdminMenu()
+        public void AdminMenu(int id)
         {
             Console.Clear();
             Console.WriteLine("\tWarehouse Management: ");
@@ -68,13 +68,13 @@ namespace Emejzon.Users
                 switch (choice)
                 {
                     case 11:
-                        IWarehouseManagement.AddProduct();
+                        IWarehouseManagement.AddProduct(id);
                         break;
                     case 12:
-                        IWarehouseManagement.DeleteProduct();
+                        IWarehouseManagement.DeleteProduct(id);
                         break;
                     case 13:
-                        IWarehouseManagement.RefillProduct();
+                        IWarehouseManagement.RefillProduct(id);
                         break;
                     case 14:
                         IWarehouseManagement.ShowAllProducts();
@@ -86,16 +86,16 @@ namespace Emejzon.Users
                         IWarehouseManagement.ShowAllUnassignedOrders();
                         break;
                     case 17:
-                        IWarehouseManagement.AsignOrder();
+                        IWarehouseManagement.AsignOrder(id);
                         break;
                     case 21:
-                        ISystemManagement.AddUser();
+                        ISystemManagement.AddUser(id);
                         break;
                     case 22:
                         ISystemManagement.ModifyUser();
                         break;
                     case 23:
-                        ISystemManagement.DeleteUser();
+                        ISystemManagement.DeleteUser(id);
                         break;
                     case 24:
                         ISystemManagement.ShowLogs();
@@ -114,7 +114,7 @@ namespace Emejzon.Users
             }
         }
 
-        public void ManagerMenu()
+        public void ManagerMenu(int id)
         {
             Console.Clear();
             Console.WriteLine("\tManager Menu:");
@@ -135,13 +135,13 @@ namespace Emejzon.Users
                 switch (choice)
                 {
                     case 1:
-                        IWarehouseManagement.AddProduct();
+                        IWarehouseManagement.AddProduct(id);
                         break;
                     case 2:
-                        IWarehouseManagement.DeleteProduct();
+                        IWarehouseManagement.DeleteProduct(id);
                         break;
                     case 3:
-                        IWarehouseManagement.RefillProduct();
+                        IWarehouseManagement.RefillProduct(id);
                         break;
                     case 4:
                         IWarehouseManagement.ShowAllProducts();
@@ -153,7 +153,7 @@ namespace Emejzon.Users
                         IWarehouseManagement.ShowAllUnassignedOrders();
                         break;
                     case 7:
-                        IWarehouseManagement.AsignOrder();
+                        IWarehouseManagement.AsignOrder(id);
                         break;
                     case 9:
                         Environment.Exit(0);

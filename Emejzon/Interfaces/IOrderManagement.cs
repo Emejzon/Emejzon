@@ -24,11 +24,15 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetString(4)}");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         static void FinalizeOrder(int workerID)
@@ -46,16 +50,21 @@ namespace Emejzon.Interfaces
                     using var update = new MySqlCommand("Update orders set status = \"Finalized\"");
                     update.ExecuteNonQuery();
                     Console.WriteLine($"Order with ID {orderID} finalized");
+                    LogManager.AddLogEntry(workerID, $"Order with ID {orderID} finalized");
                 }
                 else
                 {
                     Console.WriteLine($"Order with ID {orderID} isn't asigned to you");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         static void SendOrder(int workerID)
@@ -70,7 +79,7 @@ namespace Emejzon.Interfaces
                 using var reader = select.ExecuteReader();
                 if (reader.Read())
                 {
-                    using var update = new MySqlCommand("Update orders set status = \"Sent\"");
+                    using var update = new MySqlCommand("Update orders set status = \"Sent\"",DB.Conn);
                     update.ExecuteNonQuery();
                     Console.WriteLine($"Order with ID {orderID} sent");
                 }
@@ -78,11 +87,15 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"Order with ID {orderID} isn't asigned to you");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
     }

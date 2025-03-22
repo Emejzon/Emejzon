@@ -24,11 +24,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Quantity` int(11) DEFAULT NULL,
-  `Catergory` varchar(64) DEFAULT NULL,
+  `Category` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Eksport danych został odznaczony.
 
 -- Zrzut struktury tabela emejzon.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -51,16 +49,21 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `WorkerId` int(11) NOT NULL DEFAULT 0,
   `Status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`) USING BTREE,
-
   KEY `ClientId` (`ClientId`),
   KEY `WorkerId` (`WorkerId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `WorkerId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Eksport danych został odznaczony.
-
--- Eksport danych został odznaczony.
+-- Zrzut struktury tabela emejzon.log
+CREATE TABLE `log` (
+	`Id` INT NOT NULL AUTO_INCREMENT,
+	`Date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	`UserId` INT NOT NULL DEFAULT 0,
+	`Message` VARCHAR(512) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`Id`),
+	CONSTRAINT `FK__users` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Zrzut struktury tabela emejzon.orderedproducts
 CREATE TABLE IF NOT EXISTS `orderproducts` (
@@ -69,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `orderproducts` (
   `ProductId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
-
   KEY `OrderId` (`OrderId`),
   KEY `ProductId` (`ProductId`),
   CONSTRAINT `OrderId` FOREIGN KEY (`Id`) REFERENCES `orders` (`Id`),

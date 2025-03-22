@@ -11,7 +11,7 @@ namespace Emejzon.Interfaces
 {
     internal interface ISystemManagement
     {
-        static void AddUser()
+        static void AddUser(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
@@ -56,16 +56,21 @@ namespace Emejzon.Interfaces
                 {
                     using var insert = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,Password,Position) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\",\"{pos}\")", DB.Conn);
                     insert.ExecuteNonQuery();
+                    LogManager.AddLogEntry(userId, $"User with email {email} added");
                 }
                 else
                 {
                     Console.WriteLine("User with same email or phone number already exist!");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
 
         }
@@ -73,7 +78,7 @@ namespace Emejzon.Interfaces
         {
             throw new NotImplementedException();
         }
-        static void DeleteUser()
+        static void DeleteUser(int userId)
         {
             var DB = DBManager.Instance();
             if (DB.IsConnect())
@@ -89,16 +94,21 @@ namespace Emejzon.Interfaces
                     using var delete = new MySqlCommand($"DELETE FROM users WHERE Email = \"{email}\" ", DB.Conn);
                     delete.ExecuteNonQuery();
                     Console.WriteLine($"User with email {email} removed");
+                    LogManager.AddLogEntry(userId, $"User with email {email} removed");
                 }
                 else
                 {
                     Console.WriteLine($"User with email {email} doesn't exist");
                 }
+                Console.ReadKey();
+                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
         static void ShowLogs()
