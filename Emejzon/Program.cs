@@ -67,16 +67,12 @@ namespace Emejzon
                     if(reader.GetString(7) == "Client")
                     {
                         Client client = new Client(reader.GetInt32(0),reader.GetString(1),Position.Client);
-<<<<<<< HEAD
                         DB.Close();
-                        //trigger client menu
-=======
                         while (true)
                         {
                             client.ClientMenu(client.Id);
                             Console.ReadKey();
                         }
->>>>>>> baf377bd3dfcf356ec77f767a290559756c76a7d
                     }
                     else
                     {
@@ -99,16 +95,12 @@ namespace Emejzon
                         }
 
                         Worker worker = new Worker(reader.GetInt32(0),reader.GetString(1),Position.Worker,role);
-<<<<<<< HEAD
                         DB.Close();
-                        worker.WorkersMenu(worker.Role, worker.Id);
-=======
                         while (true)
                         {
                             worker.WorkersMenu(worker.Role, worker.Id);
                             Console.ReadKey();
                         }
->>>>>>> baf377bd3dfcf356ec77f767a290559756c76a7d
                     }
                 }
                 else

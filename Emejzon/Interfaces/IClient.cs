@@ -35,6 +35,7 @@ namespace Emejzon.Interfaces
                         break;
                     }
                 }
+                DB.Close();
             }
             else
             {
@@ -52,6 +53,7 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"Order id: {reader["OrderId"]}");
                 }
+                DB.Close();
             }
             else
             {
@@ -67,6 +69,8 @@ namespace Emejzon.Interfaces
                 var orderId = int.Parse(Console.ReadLine());
                 using var delete = new MySqlCommand($"Delete from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
                 delete.ExecuteNonQuery();
+                Console.WriteLine($"Order with id {orderId} removed");
+                DB.Close();
             }
             else
             {

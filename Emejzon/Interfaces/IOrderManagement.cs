@@ -24,6 +24,7 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetString(4)}");
                 }
+                DB.Close();
             }
             else
             {
@@ -50,6 +51,7 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"Order with ID {orderID} isn't asigned to you");
                 }
+                DB.Close();
             }
             else
             {
@@ -76,6 +78,7 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"Order with ID {orderID} isn't asigned to you");
                 }
+                DB.Close();
             }
             else
             {

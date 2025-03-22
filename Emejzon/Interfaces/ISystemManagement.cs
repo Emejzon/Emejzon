@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Emejzon.Services;
+using Emejzon.Users;
 using MySqlConnector;
 
 namespace Emejzon.Interfaces
@@ -30,20 +31,37 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Insert password: ");
                 string password = PasswordManager.HashPassword(Console.ReadLine());
                 Console.WriteLine("Insert position: ");
-                string position = PasswordManager.HashPassword(Console.ReadLine());
+                string pos = PasswordManager.HashPassword(Console.ReadLine());
+                pos = pos.ToLower();
+                switch (pos)
+                {
+                    case "admin":
+                        pos = "Admin";
+                        break;
+                    case "manager":
+                        pos = "Manager";
+                        break;
+                    case "worker":
+                        pos = "Worker";
+                        break;
+                    default:
+                        pos =  "Client";
+                        break;
+                }
 
                 using var select = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", DB.Conn);
                 using var reader = select.ExecuteReader();
 
                 if (reader.HasRows)
                 {
-                    using var insert = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,PASSWORD,Position) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\",\"{position}\")", DB.Conn);
+                    using var insert = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,Password,Position) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\",\"{pos}\")", DB.Conn);
                     insert.ExecuteNonQuery();
                 }
                 else
                 {
                     Console.WriteLine("User with same email or phone number already exist!");
                 }
+                DB.Close();
             }
             else
             {
@@ -76,6 +94,7 @@ namespace Emejzon.Interfaces
                 {
                     Console.WriteLine($"User with email {email} doesn't exist");
                 }
+                DB.Close();
             }
             else
             {
