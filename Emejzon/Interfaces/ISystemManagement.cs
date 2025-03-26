@@ -31,7 +31,7 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Insert password: ");
                 string password = PasswordManager.HashPassword(Console.ReadLine());
                 Console.WriteLine("Insert position: ");
-                string pos = PasswordManager.HashPassword(Console.ReadLine());
+                string pos = Console.ReadLine();
                 pos = pos.ToLower();
                 switch (pos)
                 {

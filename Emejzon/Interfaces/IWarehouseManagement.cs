@@ -143,14 +143,14 @@ namespace Emejzon.Interfaces
             var DB = DBManager.Instance();
             if (DB.IsConnect())
             {
-                using var select = new MySqlCommand("SELECT * FROM orders where Workerid != null", DB.Conn);
+                using var select = new MySqlCommand("SELECT * FROM orders where Workerid IS NOT NULL", DB.Conn);
                 using var reader = select.ExecuteReader();
 
                 Console.WriteLine("ID | ClientID | WorkerID | Status");
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(4)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(3)}");
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -194,7 +194,7 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Insert workerId: ");
                 int? workerID = int.Parse(Console.ReadLine());
 
-                using var update = new MySqlCommand($"Update orders set workerID = {workerID} where orderID = {orderID}", DB.Conn);
+                using var update = new MySqlCommand($"Update orders set workerID = {workerID},status = \"Processing\" where ID = {orderID}", DB.Conn);
                 update.ExecuteNonQuery();
 
                 Console.WriteLine($"Order with id {orderID} asigned to worker with id {workerID}");

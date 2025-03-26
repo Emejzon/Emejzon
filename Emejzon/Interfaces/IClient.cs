@@ -59,9 +59,19 @@ namespace Emejzon.Interfaces
             {
                 using var select = new MySqlCommand($"Select * from orders where ClientId = {clientId};", DB.Conn);
                 using var reader = select.ExecuteReader();
-                while (reader.Read())
+                if(!reader.HasRows)
                 {
-                    Console.WriteLine($"Order id: {reader["Id"]}");
+                    Console.WriteLine("No orders found");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
+                else{
+                    Console.WriteLine("ID | Status");
+                    while(reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt32(0)} | {reader.GetString(3)}");
+                }
                 }
                 Console.ReadKey();
                 Console.Clear();
