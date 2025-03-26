@@ -14,7 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 -- Zrzut struktury bazy danych emejzon
 CREATE DATABASE IF NOT EXISTS `emejzon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `emejzon`;
@@ -45,28 +44,28 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Zrzut struktury tabela emejzon.orders
 CREATE TABLE IF NOT EXISTS `orders` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `ClientId` int(11) NOT NULL DEFAULT 0,
-  `WorkerId` int(11) NOT NULL DEFAULT 0,
+  `ClientId` int(11) NOT NULL,
+  `WorkerId` int(11) DEFAULT NULL,
   `Status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Id`),
   KEY `ClientId` (`ClientId`),
   KEY `WorkerId` (`WorkerId`),
-  CONSTRAINT `ClientId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `WorkerId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `ClientId` FOREIGN KEY (`ClientId`) REFERENCES `users` (`Id`),
+  CONSTRAINT `WorkerId` FOREIGN KEY (`WorkerId`) REFERENCES `users` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Zrzut struktury tabela emejzon.log
-CREATE TABLE `log` (
-	`Id` INT NOT NULL AUTO_INCREMENT,
-	`Date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-	`UserId` INT NOT NULL DEFAULT 0,
-	`Message` VARCHAR(512) NOT NULL DEFAULT '0',
-	PRIMARY KEY (`Id`),
+CREATE TABLE IF NOT EXISTS `log` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `UserId` INT NOT NULL,
+  `Message` VARCHAR(512) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`),
   KEY `UserId` (`UserId`),
-	CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+  CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Zrzut struktury tabela emejzon.orderedproducts
+-- Zrzut struktury tabela emejzon.orderproducts
 CREATE TABLE IF NOT EXISTS `orderproducts` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `OrderId` int(11) NOT NULL,

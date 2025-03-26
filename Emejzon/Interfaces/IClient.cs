@@ -15,8 +15,13 @@ namespace Emejzon.Interfaces
             var DB = DBManager.Instance();
             if (DB.IsConnect())
             {
-                using var insert = new MySqlCommand($"Insert into orders(ClientId) values ({clientId});", DB.Conn);
+                using var insert = new MySqlCommand($"Insert into orders (ClientId) values ({clientId});", DB.Conn);
                 insert.ExecuteNonQuery();
+                using var select = new MySqlCommand($"Select max(Id) from orders where ClientId = {clientId};", DB.Conn);
+                using var reader = select.ExecuteReader();
+                reader.Read();
+                int id = reader.GetInt32(0);
+                reader.DisposeAsync();
 
                 while (true)
                 {
@@ -25,7 +30,7 @@ namespace Emejzon.Interfaces
                     Console.WriteLine("Insert quantity: ");
                     var quantity = int.Parse(Console.ReadLine());
 
-                    using var insertOrder = new MySqlCommand($"Insert into orderproducts(OrderId, ProductId, Quantity) values ((select max(OrderId) from orders where ClientId = {clientId}), {productId}, {quantity});", DB.Conn);
+                    using var insertOrder = new MySqlCommand($"Insert into orderproducts(OrderId, ProductId, Quantity) values ({id}, {productId}, {quantity});", DB.Conn);
                     insertOrder.ExecuteNonQuery();
 
                     Console.WriteLine("Do you want to add another product? (y/n)");
@@ -56,7 +61,7 @@ namespace Emejzon.Interfaces
                 using var reader = select.ExecuteReader();
                 while (reader.Read())
                 {
-                    Console.WriteLine($"Order id: {reader["OrderId"]}");
+                    Console.WriteLine($"Order id: {reader["Id"]}");
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -77,7 +82,7 @@ namespace Emejzon.Interfaces
                 Console.WriteLine("Insert order id: ");
                 var orderId = int.Parse(Console.ReadLine());
 
-                using var select = new MySqlCommand($"Select * from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
+                using var select = new MySqlCommand($"Select * from orders where Id = {orderId} and ClientId = {clientId};", DB.Conn);
                 using var reader = select.ExecuteReader();
                 if (!reader.Read())
                 {
@@ -89,7 +94,9 @@ namespace Emejzon.Interfaces
                 else
                 {
                     reader.Close();
-                    using var delete = new MySqlCommand($"Delete from orders where OrderId = {orderId} and ClientId = {clientId};", DB.Conn);
+                    using var deleteProducts = new MySqlCommand($"Delete from orderproducts where OrderId = {orderId};", DB.Conn);
+                    deleteProducts.ExecuteNonQuery();
+                    using var delete = new MySqlCommand($"Delete from orders where Id = {orderId} and ClientId = {clientId};", DB.Conn);
                     delete.ExecuteNonQuery();
                 }
 

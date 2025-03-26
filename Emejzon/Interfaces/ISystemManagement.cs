@@ -49,13 +49,15 @@ namespace Emejzon.Interfaces
                         break;
                 }
 
-                using var select = new MySqlCommand("SELECT Email, PhoneNumber FROM users;", DB.Conn);
+                using var select = new MySqlCommand($"SELECT Email, PhoneNumber FROM users where(Email = \"{email}\" or PhoneNumber = {num});", DB.Conn);
                 using var reader = select.ExecuteReader();
 
-                if (reader.HasRows)
+                if (!reader.HasRows)
                 {
+                    reader.DisposeAsync();
                     using var insert = new MySqlCommand($"INSERT INTO users(Name,Surname,PhoneNumber,City,Address,Email,Password,Position) VALUES (\"{name} \",\"{surname}\",\"{num}\",\"{city}\",\"{address}\",\"{email}\",\"{password}\",\"{pos}\")", DB.Conn);
                     insert.ExecuteNonQuery();
+                    Console.WriteLine($"User with email {email} added");
                     LogManager.AddLogEntry(userId, $"User with email {email} added");
                 }
                 else
@@ -91,6 +93,7 @@ namespace Emejzon.Interfaces
 
                 if (reader.HasRows)
                 {
+                    reader.DisposeAsync();
                     using var delete = new MySqlCommand($"DELETE FROM users WHERE Email = \"{email}\" ", DB.Conn);
                     delete.ExecuteNonQuery();
                     Console.WriteLine($"User with email {email} removed");

@@ -64,7 +64,6 @@ namespace Emejzon.Users
             {
                 Console.Write("Select option: ");
                 var choice = int.Parse(Console.ReadLine());
-
                 switch (choice)
                 {
                     case 11:
@@ -131,7 +130,6 @@ namespace Emejzon.Users
             {
                 Console.Write("Select option: ");
                 var choice = int.Parse(Console.ReadLine());
-
                 switch (choice)
                 {
                     case 1:

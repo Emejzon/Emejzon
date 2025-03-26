@@ -45,10 +45,14 @@ namespace Emejzon.Interfaces
                 int id = int.Parse(Console.ReadLine());
 
                 using var delete = new MySqlCommand($"Delete from products where id = {id}", DB.Conn);
-                delete.ExecuteNonQuery();
-
-                Console.WriteLine($"Deleted product with id {id}");
-                LogManager.AddLogEntry(userId, $"Deleted product with id {id}");
+                if(delete.ExecuteNonQuery() == 0)
+                {
+                    Console.WriteLine("Product not found");
+                }
+                else{
+                    Console.WriteLine($"Deleted product with id {id}");
+                    LogManager.AddLogEntry(userId, $"Deleted product with id {id}");
+                }
                 Console.ReadKey();
                 Console.Clear();
                 DB.Close();
@@ -70,10 +74,15 @@ namespace Emejzon.Interfaces
                 int? quantity = int.Parse(Console.ReadLine());
 
                 using var update = new MySqlCommand($"UPDATE products SET quantity = quantity + {quantity} WHERE id = {id};", DB.Conn);
-                update.ExecuteNonQuery();
-
-                Console.WriteLine($"Refilled product with id {id}");
-                LogManager.AddLogEntry(userId, $"Refilled product with id {id}");
+                if(update.ExecuteNonQuery() == 0)
+                {
+                    Console.WriteLine("Product not found");
+                }
+                else
+                {
+                    Console.WriteLine($"Refilled product with id {id}");
+                    LogManager.AddLogEntry(userId, $"Refilled product with id {id}");
+                }
                 Console.ReadKey();
                 Console.Clear();
                 DB.Close();
@@ -95,7 +104,7 @@ namespace Emejzon.Interfaces
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetString(1)}| {reader.GetInt64(2)} |{reader.GetString(3)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetString(1)} | {reader.GetInt64(2)} | {reader.GetString(3)}");
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -118,7 +127,7 @@ namespace Emejzon.Interfaces
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)}| {reader.GetInt64(2)} |{reader.GetString(4)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(4)}");
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -141,7 +150,7 @@ namespace Emejzon.Interfaces
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetInt64(2)} |{reader.GetString(4)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(4)}");
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -164,7 +173,7 @@ namespace Emejzon.Interfaces
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)}| {reader.GetInt64(1)} |{reader.GetString(4)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetString(4)}");
                 }
                 Console.ReadKey();
                 Console.Clear();

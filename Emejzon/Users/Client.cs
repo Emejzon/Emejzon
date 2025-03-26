@@ -13,18 +13,18 @@ namespace Emejzon.Users
         public int PhoneNumber { get; set; }
         public string? City { get; set; }
         public string? Address { get; set; }
-        public Client(int id, string? name, Position position) :base(id,name,position) {}
+        public Client(int id, string? name, Position position) : base(id, name, position) { }
 
         public void ClientMenu(int Id)
         {
+            Console.Clear();
+            Console.WriteLine("[1]. Show status of your orders");
+            Console.WriteLine("[2]. Remove order");
+            Console.WriteLine("[3]. Place order");
+            Console.WriteLine(); //for visibility
+            Console.WriteLine("[9]. Exit program");
             try
             {
-                Console.Clear();
-                Console.WriteLine("[1]. Show status of your orders");
-                Console.WriteLine("[2]. Remove order");
-                Console.WriteLine("[3]. Place order");
-                Console.WriteLine("[9]. Exit program");
-                Console.WriteLine();
                 Console.Write("Select option: ");
                 var choice = int.Parse(Console.ReadLine());
                 switch (choice)
