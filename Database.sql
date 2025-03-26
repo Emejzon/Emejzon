@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `ClientId` int(11) NOT NULL DEFAULT 0,
   `WorkerId` int(11) NOT NULL DEFAULT 0,
   `Status` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`Id`) USING BTREE,
+  PRIMARY KEY (`Id`),
   KEY `ClientId` (`ClientId`),
   KEY `WorkerId` (`WorkerId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`Id`) REFERENCES `users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -62,7 +62,8 @@ CREATE TABLE `log` (
 	`UserId` INT NOT NULL DEFAULT 0,
 	`Message` VARCHAR(512) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`Id`),
-	CONSTRAINT `FK__users` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+  KEY `UserId` (`UserId`),
+	CONSTRAINT `UserId` FOREIGN KEY (`UserId`) REFERENCES `users` (`Id`) ON UPDATE NO ACTION ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Zrzut struktury tabela emejzon.orderedproducts
@@ -74,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `orderproducts` (
   PRIMARY KEY (`Id`),
   KEY `OrderId` (`OrderId`),
   KEY `ProductId` (`ProductId`),
-  CONSTRAINT `OrderId` FOREIGN KEY (`Id`) REFERENCES `orders` (`Id`),
-  CONSTRAINT `ProductId` FOREIGN KEY (`Id`) REFERENCES `products` (`Id`)
+  CONSTRAINT `OrderId` FOREIGN KEY (`OrderId`) REFERENCES `orders` (`Id`),
+  CONSTRAINT `ProductId` FOREIGN KEY (`ProductId`) REFERENCES `products` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Eksport danych został odznaczony.
