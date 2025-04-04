@@ -45,7 +45,7 @@ namespace Emejzon.Interfaces
                         pos = "Worker";
                         break;
                     default:
-                        pos =  "Client";
+                        pos = "Client";
                         break;
                 }
 
@@ -74,11 +74,147 @@ namespace Emejzon.Interfaces
                 Console.ReadKey();
                 Console.Clear();
             }
-
         }
-        static void ModifyUser()
+        static void ModifyUser(int userId)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Insert id: ");
+            int id = int.Parse(Console.ReadLine());
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                using var select = new MySqlCommand($"SELECT * FROM users where id = {id}", DB.Conn);
+                using var reader = select.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.DisposeAsync();
+
+                    Console.Write("Select option: ");
+                    var choice = int.Parse(Console.ReadLine());
+                    Console.WriteLine("[1]Name");
+                    Console.WriteLine("[2]Surname");
+                    Console.WriteLine("[3]Email");
+                    Console.WriteLine("[4]Phone number");
+                    Console.WriteLine("[5]City");
+                    Console.WriteLine("[6]Address");
+                    Console.WriteLine("[7]Position");
+                    Console.WriteLine("[8]Password");
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.WriteLine("Insert new name:");
+                            string name = Console.ReadLine();
+                            {
+                                using var update = new MySqlCommand($"UPDATE users SET Name = \"{name}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        case 2:
+                            Console.WriteLine("Insert new surname:");
+                            string surname = Console.ReadLine();
+                            {
+                                using var update = new MySqlCommand($"UPDATE users SET Surname = \"{surname}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        case 3:
+                            Console.WriteLine("Insert new email:");
+                            string emailAddress = Console.ReadLine();
+                            {
+                                using var email = new MySqlCommand($"SELECT PhoneNumber FROM users where PhoneNumber = {emailAddress}", DB.Conn);
+                                using var checkEmail = email.ExecuteReader();
+                                if (!checkEmail.HasRows)
+                                {
+                                    using var update = new MySqlCommand($"UPDATE users SET Email = {emailAddress} WHERE id = {id}", DB.Conn);
+                                    update.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    Console.WriteLine("User with this email already exist");
+                                }
+                                checkEmail.DisposeAsync();
+                            }
+                            break;
+                        case 4:
+                            Console.WriteLine("Insert new phone number:");
+                            int num = int.Parse(Console.ReadLine());
+                            {
+                                using var phoneNum = new MySqlCommand($"SELECT PhoneNumber FROM users where PhoneNumber = {num}", DB.Conn);
+                                using var checkPhoneNum = phoneNum.ExecuteReader();
+                                if (!checkPhoneNum.HasRows)
+                                {
+                                    using var update = new MySqlCommand($"UPDATE users SET PhoneNumber = {num} WHERE id = {id}", DB.Conn);
+                                    update.ExecuteNonQuery();
+                                }
+                                checkPhoneNum.DisposeAsync();
+                            }
+                            break;
+                        case 5:
+                            Console.WriteLine("Insert new city:");
+                            string city = Console.ReadLine();
+                            {
+                                using var update = new MySqlCommand($"UPDATE users SET City = \"{city}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        case 6:
+                            Console.WriteLine("Insert new address:");
+                            string address = Console.ReadLine();
+                            {
+                                using var update = new MySqlCommand($"UPDATE users SET Address = \"{address}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        case 7:
+                            Console.WriteLine("Insert new position:");
+                            string pos = Console.ReadLine();
+                            {
+                                pos = pos.ToLower();
+                                switch (pos)
+                                {
+                                    case "admin":
+                                        pos = "Admin";
+                                        break;
+                                    case "manager":
+                                        pos = "Manager";
+                                        break;
+                                    case "worker":
+                                        pos = "Worker";
+                                        break;
+                                    default:
+                                        pos = "Client";
+                                        break;
+                                }
+                                using var update = new MySqlCommand($"UPDATE users SET Position = \"{pos}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        case 8:
+                            Console.WriteLine("Insert new password:");
+                            string password = Console.ReadLine();
+                            password = PasswordManager.HashPassword(password);
+                            {
+                                using var update = new MySqlCommand($"UPDATE users SET Password = \"{password}\" WHERE id = {id}", DB.Conn);
+                                update.ExecuteNonQuery();
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Choose a valid option");
+                            break;
+                    }
+                    Console.WriteLine($"User with id {id} modified");
+                    LogManager.AddLogEntry(userId, $"User with id {id} modified");
+                }
+                else
+                {
+                    Console.WriteLine("User not found");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Database connection error");
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
         static void DeleteUser(int userId)
         {

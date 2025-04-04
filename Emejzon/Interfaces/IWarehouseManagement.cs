@@ -61,7 +61,6 @@ namespace Emejzon.Interfaces
             {
                 Console.WriteLine("Database connection error");
             }
-
         }
         public static void RefillProduct(int userId)
         {
