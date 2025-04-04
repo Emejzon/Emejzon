@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net9.0": {
-      "Microsoft.DotNet.ILCompiler/9.0.0": {
+      "Microsoft.DotNet.ILCompiler/9.0.2": {
         "type": "package",
         "build": {
           "build/Microsoft.DotNet.ILCompiler.props": {}
@@ -43,7 +43,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.0": {
+      "Microsoft.NET.ILLink.Tasks/9.0.2": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -69,10 +69,10 @@
     }
   },
   "libraries": {
-    "Microsoft.DotNet.ILCompiler/9.0.0": {
-      "sha512": "bbnlV2PbUmCQ8Ndpx0kJaicLyV28IU+4IzyctQLL57+DxrHurYr2qsJrC8+yD44Q0DyPfv2oM168c1Tk6Bxbmg==",
+    "Microsoft.DotNet.ILCompiler/9.0.2": {
+      "sha512": "eyIUUqqPy7brzmoV04zabOUm0puEAAjZd3O3vuzan9iTTh0oIPwts8fLxZFoEZCFi63ACFtHbNBs5Y7myB3ZDQ==",
       "type": "package",
-      "path": "microsoft.dotnet.ilcompiler/9.0.0",
+      "path": "microsoft.dotnet.ilcompiler/9.0.2",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -91,7 +91,7 @@
         "build/NativeAOT.natvis",
         "build/WindowsAPIs.txt",
         "build/findvcvarsall.bat",
-        "microsoft.dotnet.ilcompiler.9.0.0.nupkg.sha512",
+        "microsoft.dotnet.ilcompiler.9.0.2.nupkg.sha512",
         "microsoft.dotnet.ilcompiler.nuspec",
         "runtime.json",
         "tools/netstandard/ILCompiler.Build.Tasks.deps.json",
@@ -203,10 +203,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.0": {
-      "sha512": "zAwp213evC3UkimtVXRb+Dlgc/40QG145nmZDtp2LO9zJJMfrp+i/87BnXN7tRXEA4liyzdFkjqG1HE8/RPb4A==",
+    "Microsoft.NET.ILLink.Tasks/9.0.2": {
+      "sha512": "+KFnCLVPicEq99ko0tq+ycTvNLXHw0tImmTZjPloB/DOFLPT56KLfk5aS7wbgXRPzYhXTTBYLGaABea5mke77w==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.0",
+      "path": "microsoft.net.illink.tasks/9.0.2",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -220,7 +220,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.0.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.2.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -286,37 +286,30 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.DotNet.ILCompiler >= 9.0.0",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.0",
+      "Microsoft.DotNet.ILCompiler >= 9.0.2",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.2",
       "MySqlConnector >= 2.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adminitrator\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/home/f/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj",
+      "projectUniqueName": "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj",
       "projectName": "Emejzon",
-      "projectPath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\Emejzon.csproj",
-      "packagesPath": "C:\\Users\\Adminitrator\\.nuget\\packages\\",
-      "outputPath": "C:\\kod\\emejzon\\Emejzon\\Emejzon\\obj\\",
+      "projectPath": "/home/f/kod/Emejzon/Emejzon/Emejzon/Emejzon.csproj",
+      "packagesPath": "/home/f/.nuget/packages/",
+      "outputPath": "/home/f/kod/Emejzon/Emejzon/Emejzon/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Adminitrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/f/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -335,7 +328,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net9.0": {
@@ -344,13 +337,13 @@
           "Microsoft.DotNet.ILCompiler": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0, )",
+            "version": "[9.0.2, )",
             "autoReferenced": true
           },
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.0, )",
+            "version": "[9.0.2, )",
             "autoReferenced": true
           },
           "MySqlConnector": {
@@ -371,8 +364,8 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
-            "version": "[9.0.0, 9.0.0]"
+            "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
+            "version": "[9.0.2, 9.0.2]"
           }
         ],
         "frameworkReferences": {
@@ -380,7 +373,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

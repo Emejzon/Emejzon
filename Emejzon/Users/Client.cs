@@ -10,9 +10,6 @@ namespace Emejzon.Users
 {
     internal class Client : User, IClient
     {
-        public int PhoneNumber { get; set; }
-        public string? City { get; set; }
-        public string? Address { get; set; }
         public Client(int id, string? name, Position position) : base(id, name, position) { }
 
         public void ClientMenu(int Id)
