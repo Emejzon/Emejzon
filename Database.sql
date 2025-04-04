@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `ClientId` int(11) NOT NULL,
   `WorkerId` int(11) DEFAULT NULL,
-  `Status` enum('Unasigned', 'Processing', 'Finalized', 'Sent') NOT NULL DEFAULT 'Pending',
+  `Status` enum('Unasigned', 'Processing', 'Finalized', 'Sent') NOT NULL DEFAULT 'Unasigned',
   PRIMARY KEY (`Id`),
   KEY `ClientId` (`ClientId`),
   KEY `WorkerId` (`WorkerId`),
