@@ -91,7 +91,7 @@ namespace Emejzon.Users
                         ISystemManagement.AddUser(id);
                         break;
                     case 22:
-                        ISystemManagement.ModifyUser();
+                        ISystemManagement.ModifyUser(id);
                         break;
                     case 23:
                         ISystemManagement.DeleteUser(id);

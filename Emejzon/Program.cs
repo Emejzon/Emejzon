@@ -94,6 +94,7 @@ namespace Emejzon
                                 break;
                         }
 
+
                         Worker worker = new Worker(reader.GetInt32(0),reader.GetString(1),Position.Worker,role);
                         DB.Close();
                         while (true)

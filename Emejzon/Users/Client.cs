@@ -18,6 +18,7 @@ namespace Emejzon.Users
             Console.WriteLine("[1]. Show status of your orders");
             Console.WriteLine("[2]. Remove order");
             Console.WriteLine("[3]. Place order");
+            Console.WriteLine("[4]. Show all products");
             Console.WriteLine(); //for visibility
             Console.WriteLine("[9]. Exit program");
             try
@@ -34,6 +35,9 @@ namespace Emejzon.Users
                         break;
                     case 3:
                         IClient.PlaceOrder(Id);
+                        break;
+                    case 4:
+                        IWarehouseManagement.ShowAllProducts();
                         break;
                     case 9:
                         Console.WriteLine("See you next time");

@@ -96,7 +96,7 @@ namespace Emejzon.Interfaces
             var DB = DBManager.Instance();
             if (DB.IsConnect())
             {
-                using var select = new MySqlCommand("SELECT * FROM products where hidden = 0", DB.Conn);
+                using var select = new MySqlCommand("SELECT * FROM products", DB.Conn);
                 using var reader = select.ExecuteReader();
 
                 Console.WriteLine("ID | Name | Quantity | Category");
