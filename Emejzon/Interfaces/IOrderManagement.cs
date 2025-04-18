@@ -40,21 +40,48 @@ namespace Emejzon.Interfaces
             var DB = DBManager.Instance();
             if (DB.IsConnect())
             {
-                Console.WriteLine("Insert order ID to Finalize");
-                int? orderID = int.Parse(Console.ReadLine());
-
-                using var select = new MySqlCommand($"SELECT * FROM orders where Workerid = {workerID}", DB.Conn);
-                using var reader = select.ExecuteReader();
-                if (reader.Read())
+                Console.WriteLine("Insert order ID to finalize:");
+                if (!int.TryParse(Console.ReadLine(), out int orderID))
                 {
-                    using var update = new MySqlCommand("Update orders set status = \"Finalized\"");
-                    update.ExecuteNonQuery();
-                    Console.WriteLine($"Order with ID {orderID} finalized");
-                    LogManager.AddLogEntry(workerID, $"Order with ID {orderID} finalized");
+                    Console.WriteLine("Invalid order ID.");
+                    return;
+                }
+
+                // Check if the order is assigned to the worker
+                using var selectOrder = new MySqlCommand($"SELECT * FROM orders WHERE WorkerId = {workerID} AND Id = {orderID}", DB.Conn);
+
+                using var orderReader = selectOrder.ExecuteReader();
+                if (orderReader.Read())
+                {
+                    orderReader.Close(); 
+
+                    using var selectProducts = new MySqlCommand($"SELECT ProductId, Quantity FROM orderproducts WHERE OrderId = {orderID}", DB.Conn);
+                    using var productReader = selectProducts.ExecuteReader();
+                    var productUpdates = new List<(int productId, int quantity)>();
+
+                    while (productReader.Read())
+                    {
+                        int productId = productReader.GetInt32(0);
+                        int quantity = productReader.GetInt32(1);
+                        productUpdates.Add((productId, quantity));
+                    }
+                    productReader.Close();
+
+                    foreach (var (productId, quantity) in productUpdates)
+                    {
+                        using var updateProduct = new MySqlCommand($"UPDATE products SET Quantity = Quantity - {quantity} WHERE Id = {productId}", DB.Conn);
+                        updateProduct.ExecuteNonQuery();
+                    }
+
+                    using var updateOrder = new MySqlCommand($"UPDATE orders SET Status = 'Finalized' WHERE Id = {orderID}", DB.Conn);
+                    updateOrder.ExecuteNonQuery();
+
+                    Console.WriteLine($"Order with ID {orderID} finalized.");
+                    LogManager.AddLogEntry(workerID, $"Order with ID {orderID} finalized and product quantities updated.");
                 }
                 else
                 {
-                    Console.WriteLine($"Order with ID {orderID} isn't asigned to you");
+                    Console.WriteLine($"Order with ID {orderID} isn't asigned o you");
                 }
                 Console.ReadKey();
                 Console.Clear();

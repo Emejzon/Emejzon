@@ -72,7 +72,6 @@ namespace Emejzon.Interfaces
             {
                 Console.WriteLine("Database connection error");
                 Console.ReadKey();
-                Console.Clear();
             }
         }
         static void ModifyUser(int userId)
@@ -88,8 +87,7 @@ namespace Emejzon.Interfaces
                 {
                     reader.DisposeAsync();
 
-                    Console.Write("Select option: ");
-                    var choice = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Select option: ");
                     Console.WriteLine("[1]Name");
                     Console.WriteLine("[2]Surname");
                     Console.WriteLine("[3]Email");
@@ -98,6 +96,7 @@ namespace Emejzon.Interfaces
                     Console.WriteLine("[6]Address");
                     Console.WriteLine("[7]Position");
                     Console.WriteLine("[8]Password");
+                    var choice = int.Parse(Console.ReadLine());
                     switch (choice)
                     {
                         case 1:
@@ -120,11 +119,11 @@ namespace Emejzon.Interfaces
                             Console.WriteLine("Insert new email:");
                             string emailAddress = Console.ReadLine();
                             {
-                                using var email = new MySqlCommand($"SELECT PhoneNumber FROM users where PhoneNumber = {emailAddress}", DB.Conn);
+                                using var email = new MySqlCommand($"SELECT PhoneNumber FROM users where PhoneNumber = \"{emailAddress}\"", DB.Conn);
                                 using var checkEmail = email.ExecuteReader();
                                 if (!checkEmail.HasRows)
                                 {
-                                    using var update = new MySqlCommand($"UPDATE users SET Email = {emailAddress} WHERE id = {id}", DB.Conn);
+                                    using var update = new MySqlCommand($"UPDATE users SET Email = \"{emailAddress}\" WHERE id = {id}", DB.Conn);
                                     update.ExecuteNonQuery();
                                 }
                                 else
@@ -213,8 +212,8 @@ namespace Emejzon.Interfaces
             {
                 Console.WriteLine("Database connection error");
                 Console.ReadKey();
-                Console.Clear();
             }
+            DB.Close();
         }
         static void DeleteUser(int userId)
         {
@@ -240,19 +239,31 @@ namespace Emejzon.Interfaces
                     Console.WriteLine($"User with email {email} doesn't exist");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
             {
                 Console.WriteLine("Database connection error");
-                Console.ReadKey();
                 Console.Clear();
             }
         }
         static void ShowLogs()
         {
-            throw new NotImplementedException();
+            var DB = DBManager.Instance();
+            if (DB.IsConnect())
+            {
+                using var command = new MySqlCommand("SELECT * FROM log", DB.Conn);
+                using var reader = command.ExecuteReader();
+
+                Console.WriteLine("ID | Date \t\t| UserID | Message");
+
+                while (reader.Read())
+                {
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetDateTime(1)} | {reader.GetInt64(2)} | {reader.GetString(3)}");
+                }
+                Console.ReadKey();
+                DB.Close();
+            }
         }
     }
 }

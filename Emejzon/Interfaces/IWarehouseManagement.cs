@@ -28,7 +28,6 @@ namespace Emejzon.Interfaces
                 Console.WriteLine($"Added {name} to product list");
                 LogManager.AddLogEntry(userId, $"Added {name} to product list");
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -54,7 +53,6 @@ namespace Emejzon.Interfaces
                     LogManager.AddLogEntry(userId, $"Deleted product with id {id}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -83,7 +81,6 @@ namespace Emejzon.Interfaces
                     LogManager.AddLogEntry(userId, $"Refilled product with id {id}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -106,7 +103,6 @@ namespace Emejzon.Interfaces
                     Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetString(1)} | {reader.GetInt64(2)} | {reader.GetString(3)}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -129,7 +125,6 @@ namespace Emejzon.Interfaces
                     Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(4)}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -149,10 +144,9 @@ namespace Emejzon.Interfaces
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetString(3)}");
+                    Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetInt64(2)} | {reader.GetBoolean(3)}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -175,7 +169,6 @@ namespace Emejzon.Interfaces
                     Console.WriteLine($"{reader.GetInt64(0)} | {reader.GetInt64(1)} | {reader.GetString(4)}");
                 }
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
@@ -199,7 +192,6 @@ namespace Emejzon.Interfaces
                 Console.WriteLine($"Order with id {orderID} asigned to worker with id {workerID}");
                 LogManager.AddLogEntry(userId, $"Order with id {orderID} asigned to worker with id {workerID}");
                 Console.ReadKey();
-                Console.Clear();
                 DB.Close();
             }
             else
