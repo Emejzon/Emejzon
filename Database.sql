@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `PhoneNumber` int(9) NOT NULL DEFAULT 111222333,
   `City` varchar(64) NOT NULL DEFAULT 'Poznan',
   `Address` varchar(256) NOT NULL DEFAULT 'Fredry 13',
-  `Position` enum('Admin','Manager','Worker','Client') NOT NULL,
+  `Position` enum('Admin','Manager','Worker','Client') NOT NULL DEFAULT 'Client',
   `Password` varchar(512) NOT NULL DEFAULT 'password123',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
