@@ -78,6 +78,15 @@ CREATE TABLE IF NOT EXISTS `orderproducts` (
   CONSTRAINT `ProductId` FOREIGN KEY (`ProductId`) REFERENCES `products` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+INSERT INTO users(Name, Surname, Email, PhoneNumber, City,Address,Position, Password)
+VALUES('Admin', 'Example', 'admin@example.com', 123456789, 'Poznan', 'Fredry 13', 'Admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
+
+INSERT INTO products(NAME, Quantity, Category) 
+VALUES('kubek', 3000, 'dom'),
+('zegarek', 1000, 'elektronika'),
+('laptop', 500, 'elektronika'),
+('pralka', 1500, 'AGD')
+
 -- Eksport danych został odznaczony.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
